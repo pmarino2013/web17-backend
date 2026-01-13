@@ -17,10 +17,15 @@ const handleValidationErrors = (req, res, next) => {
         next()
 }
 
+//Funciones de validación
+
+// 1 - Validación de registro
 
 
+// 2 - Validación de Login
 
 
+// 3 - Validación del código de verificación
 
 
 export {
