@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
+import cookieParser from "cookie-parser";
 const app = express();
 const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
 
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las vari
 app.use(express.json()); // explico a mi app que entienda el formato json (parsear)
 app.use(express.urlencoded({extended:true})) // explicarle a la app que pueda recibir info en formato json de un formulario
 app.use(morgan('dev')); // capturo todos los logs de la app y muestra por consola
+app.use(cookieParser());// le explico a express que use cookie parser para poder acceder a las cookies
 
 //Rutas
 app.use("/api/auth", authRoutes);
