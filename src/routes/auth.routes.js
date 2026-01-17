@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { login, register } from "../controllers/auth.controller.js";
-import { loginValidation, registerValidation } from "../middlewares/validator.js";
+import { login, register, verifyEmail } from "../controllers/auth.controller.js";
+import { loginValidation, registerValidation, verifyEmailValidation } from "../middlewares/validator.js";
 
 
 
@@ -17,7 +17,7 @@ router.get('/prueba', (req,res) => {
 //RUTAS PUBLICAS
 router.post('/register', registerValidation() , register)
 router.post('/login', loginValidation(), login)
-//router.post('/verify-email')
+router.post('/verify-email', verifyEmailValidation(), verifyEmail)
 
 //RUTAS PRIVADAS
 //router.post('/logout')

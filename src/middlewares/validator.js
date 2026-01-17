@@ -77,7 +77,7 @@ const verifyEmailValidation = () => [
       .withMessage('Please provide a valid email')
       .custom(async (email) => {
         const user = await User.findOne({email});
-        if(user.emailVerified){
+        if(user && user.emailVerified){
             throw new Error('El usuario ya está verificado')
         }
       })
