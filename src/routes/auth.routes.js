@@ -17,6 +17,8 @@ router.get('/prueba', (req,res) => {
 //RUTAS PUBLICAS
 router.post('/register', registerValidation() , register)
 router.post('/login', loginValidation(), login)
+
+//creado por mi
 router.post('/verify-email', verifyEmailValidation(), verifyEmail)
 
 //RUTAS PRIVADAS

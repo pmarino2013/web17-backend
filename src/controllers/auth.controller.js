@@ -74,6 +74,14 @@ const login = async (req,res) => {
             })
         }
 
+        //Chequear si tiene el código verificado
+        if(!user.emailVerified){
+            return res.status(403).json({
+                ok:false,
+                message:'El email no está verificado'
+            })
+        }
+        //--------------------------------------------
 
         //generar el token
         const token = generateToken(user._id);
@@ -136,13 +144,14 @@ const verifyEmail = async (req, res) => {
             });
         }
 
-        // Verificar que el código no haya expirado
+        // Verificar que el código no haya expirado (por mi)
         if (user.verificationCodeExpires < Date.now()) {
             return res.status(400).json({
                 ok: false,
                 message: 'El código de verificación ha expirado'
             });
         }
+        //--------------------------------------------------------
 
         // Marcar el email como verificado y limpiar el código
         user.emailVerified = true;
