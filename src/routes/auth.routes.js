@@ -22,7 +22,19 @@ router.post('/login', loginValidation(), login)
 router.post('/verify-email', verifyEmailValidation(), verifyEmail)
 
 //RUTAS PRIVADAS
-//router.post('/logout')
+//router.post('/logout') yo
+router.post('/logout',(req, res)=>{
+// Limpiamos la cookie llamada 'access_token'
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true,
+        sameSite:'lax',
+      
+
+    });
+
+    return res.status(200).json({ ok:true, message: 'Sesión cerrada exitosamente' });
+})
 //router.get('/profile')
 
 
