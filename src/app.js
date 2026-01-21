@@ -9,7 +9,10 @@ const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las vari
 
 
 //Middlewares
-app.use(cors())
+app.use(cors({
+    origin:'http://localhost:9500',
+    credencial:true
+}))
 app.use(express.json()); // explico a mi app que entienda el formato json (parsear)
 app.use(express.urlencoded({extended:true})) // explicarle a la app que pueda recibir info en formato json de un formulario
 app.use(morgan('dev')); // capturo todos los logs de la app y muestra por consola
