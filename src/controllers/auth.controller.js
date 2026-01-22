@@ -167,5 +167,24 @@ const verifyEmail = async (req, res) => {
 // El controlador para hacer logout
 
 // El controlador con el perfil del usuario
+const getProfile = async (req, res) => {
+  try {
+    const { username, email, role, emailVerified } = req.user;
+    res.json({
+      success: true,
+      data: {
+        username,
+        email,
+        role,
+        emailVerified,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      error: error.message,
+    });
+  }
+};
 
-export { register, login, verifyEmail };
+export { register, login, verifyEmail, getProfile };

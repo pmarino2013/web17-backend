@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 import cookieParser from "cookie-parser";
 //importar Cors
 import cors from "cors";
@@ -25,6 +26,7 @@ app.use(cookieParser()); // le explico a express que use cookie parser para pode
 
 //Rutas
 app.use("/api/auth", authRoutes);
+app.use("/api/category", categoryRoutes);
 
 //Conexión Base de datos
 await dbConnect();
