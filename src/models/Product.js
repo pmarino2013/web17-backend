@@ -8,7 +8,6 @@ const ProductoSchema = Schema({
   },
   estado: {
     type: Boolean,
-    required: true,
     default: true,
   },
   usuario: {

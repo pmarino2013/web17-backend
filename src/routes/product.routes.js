@@ -27,6 +27,11 @@ router.post(
       .withMessage("La categoría esobligatoria")
       .isMongoId()
       .withMessage("No es un id de mongo válido"),
+    check("usuario")
+      .notEmpty()
+      .withMessage("El usuario es obligatorio")
+      .isMongoId()
+      .withMessage("Debe ser un id de mongo válido"),
 
     handleValidationErrors,
   ],
@@ -54,6 +59,7 @@ router.delete(
   "/:id",
   [
     authenticate,
+    validarRol,
     check("id").isMongoId().withMessage("No es un id de mongo válido"),
     handleValidationErrors,
   ],

@@ -104,6 +104,7 @@ const existeCategoriaPorId = async (id) => {
   }
 };
 
+//Validar rol admin
 const validarRol = (req, res, next) => {
   const rol = req.user.role;
   console.log(rol);
