@@ -4,6 +4,7 @@ import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
@@ -25,6 +26,7 @@ app.use(cookieParser()); // le explico a express que use cookie parser para pode
 app.use("/api/auth", authRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 //Conexión Base de datos
 await dbConnect();
