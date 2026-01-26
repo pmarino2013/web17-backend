@@ -40,13 +40,22 @@ const crearCategoria = async (req, res) => {
 const actualizarCategoria = async (req, res) => {
   const { id } = req.params;
 
-  const { nombre } = req.body;
+  // const { nombre } = req.body;
+  const nombre = req.body.nombre.toUpperCase();
 
   //validar nombre
+  const validarNombre = await Categoria.findOne({ nombre });
+  if (validarNombre) {
+    return res.status(400).json({
+      ok: false,
+      message: "Ya existe una categoría con ese nombre",
+    });
+  }
+
   //validar que el id exista en la BD
 
   const datos = {
-    nombre: nombre.toUpperCase(),
+    nombre,
     usuario: req.user._id,
   };
 
@@ -58,4 +67,25 @@ const actualizarCategoria = async (req, res) => {
   });
 };
 
-export { traerCategorias, crearCategoria, actualizarCategoria };
+//borrar categoría------------------------------------
+const eliminarCategoria = async (req, res) => {
+  const { id } = req.params;
+
+  const categoriaBorrada = await Categoria.findByIdAndUpdate(
+    id,
+    { estado: false },
+    { new: true },
+  );
+
+  res.status(200).json({
+    message: "Categoria eliminada",
+    categoriaBorrada,
+  });
+};
+
+export {
+  traerCategorias,
+  crearCategoria,
+  actualizarCategoria,
+  eliminarCategoria,
+};
