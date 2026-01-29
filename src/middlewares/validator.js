@@ -117,6 +117,15 @@ const validarRolAdmin = (req, res, next) => {
   next();
 };
 
+//validar producto por id
+const validarIdProducto = async (id) => {
+  const productoPorId = await Producto.findById(id);
+
+  if (!productoPorId) {
+    throw new Error("No existe el producto");
+  }
+};
+
 export {
   registerValidation,
   loginValidation,
@@ -124,4 +133,5 @@ export {
   handleValidationErrors,
   existeCategoriaPorId,
   validarRolAdmin,
+  validarIdProducto,
 };
