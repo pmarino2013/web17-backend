@@ -1,6 +1,5 @@
 import express from "express";
 import morgan from "morgan";
-import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
@@ -28,7 +27,4 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
 
-//Conexión Base de datos
-await dbConnect();
-
-app.listen(PORT, () => console.log("🚀 Servidor en línea en puerto: " + PORT));
+export default app;
