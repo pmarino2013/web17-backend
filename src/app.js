@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import { dbConnect } from "./config/db.js";
+// import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
@@ -10,7 +10,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
+//const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
 
 //Middlewares
 //usar Cors
@@ -32,7 +32,9 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
 
-//Conexión Base de datos
-await dbConnect();
+export default app;
 
-app.listen(PORT, () => console.log("🚀 Servidor en línea en puerto: " + PORT));
+//Conexión Base de datos
+// await dbConnect();
+
+// app.listen(PORT, () => console.log("🚀 Servidor en línea en puerto: " + PORT));
