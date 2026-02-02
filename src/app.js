@@ -18,6 +18,7 @@ app.use(
     credencial: true,
   }),
 );
+app.use(express.static("public")); //le digo a express que la carpeta public es estatica y de ahi va a servir los archivos
 app.use(express.json()); // explico a mi app que entienda el formato json (parsear)
 app.use(express.urlencoded({ extended: true })); // explicarle a la app que pueda recibir info en formato json de un formulario
 app.use(morgan("dev")); // capturo todos los logs de la app y muestra por consola
