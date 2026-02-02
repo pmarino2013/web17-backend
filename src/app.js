@@ -8,7 +8,8 @@ import cartRoutes from "./routes/cart.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
-const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
+
+//const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
 
 //Middlewares
 app.use(
