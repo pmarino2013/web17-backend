@@ -1,0 +1,54 @@
+import { Router } from "express";
+import { check } from "express-validator";
+import { authenticate } from "../middlewares/auth.js";
+import {
+  actualizarProducto,
+  crearProducto,
+  obtenerProductos,
+} from "../controllers/product.controller.js";
+import {
+  handleValidationErrors,
+  validarIdProducto,
+} from "../middlewares/validator.js";
+
+const router = Router();
+
+router.get("/", obtenerProductos);
+
+router.post(
+  "/",
+  [
+    authenticate,
+    check("nombre", "El nombre es obligatorio").notEmpty(),
+    check("categoria")
+      .notEmpty()
+      .withMessage("La categoría es obligatoria")
+      .isMongoId()
+      .withMessage("No es un id de mongo válido"),
+    check("usuario")
+      .notEmpty()
+      .withMessage("El usuario es obligatorio")
+      .isMongoId()
+      .withMessage("Debe ser un id de mongo válido"),
+    handleValidationErrors,
+  ],
+  crearProducto,
+);
+
+router.put(
+  "/:id",
+  [
+    authenticate,
+    check("id", "No es un id válido").isMongoId(),
+    check("id").custom(validarIdProducto),
+    handleValidationErrors,
+  ],
+  actualizarProducto,
+);
+router.delete("/:id", [
+  authenticate,
+  check("id", "No es un id válido").isMongoId(),
+  check("id").custom(validarIdProducto),
+  handleValidationErrors,
+]);
+export default router;
