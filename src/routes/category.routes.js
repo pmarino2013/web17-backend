@@ -48,7 +48,7 @@ router.delete(
   [
     authenticate,
     check("id", "El id no es válido").isMongoId(),
-
+    check("id").custom(existeCategoriaPorId),
     handleValidationErrors,
   ],
   eliminarCategoria,

@@ -1,6 +1,8 @@
 import { check, validationResult } from "express-validator";
 import User from "../models/User.js";
 import Categoria from "../models/Category.js";
+import Producto from "../models/Product.js";
+import Cart from "../models/Cart.js";
 
 //armar una función que maneje el resultado de las validaciones
 const handleValidationErrors = (req, res, next) => {
@@ -117,6 +119,43 @@ const validarRol = (req, res, next) => {
   next();
 };
 
+//validar producto por id
+const validarIdProducto = async (id) => {
+  const producto = await Producto.findById(id);
+  if (producto) {
+    throw new Error("Producto ya existe");
+  }
+};
+
+//función especial
+const validarProductoParaCarrito = async (productoId) => {
+  const producto = await Producto.findById(productoId);
+
+  if (!producto) {
+    return res.status(404).json({ error: "Producto no encontrado" });
+  }
+
+  if (!producto.disponible) {
+    return res.status(400).json({ error: "Producto no disponible" });
+  }
+};
+
+//Carrito
+
+const validarCart = async (req, res, next) => {
+  console.log(req.user);
+  let cart = await Cart.findOne({ usuario: req.user.id });
+  //si carrito no existe
+  if (!cart) {
+    return res
+      .status(400)
+      .json({ ok: false, message: "Carrito no encontrado" });
+  } else {
+    req.cart = cart;
+  }
+  next();
+};
+
 export {
   registerValidation,
   loginValidation,
@@ -124,4 +163,6 @@ export {
   handleValidationErrors,
   existeCategoriaPorId,
   validarRol,
+  validarIdProducto,
+  validarCart,
 };

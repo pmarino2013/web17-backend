@@ -24,7 +24,7 @@ router.post(
     check("nombre", "El nombre es obligatorio").notEmpty(),
     check("categoria")
       .notEmpty()
-      .withMessage("La categoría esobligatoria")
+      .withMessage("La categoría es obligatoria")
       .isMongoId()
       .withMessage("No es un id de mongo válido"),
     check("usuario")

@@ -13,7 +13,7 @@ export const getCart = async (req, res) => {
   }
 };
 
-// Agregar item al carrito
+// Agregar item al carrito-----------------------------------------------------------------------
 export const addToCart = async (req, res) => {
   try {
     const { productoId, cantidad } = req.body;
@@ -28,6 +28,7 @@ export const addToCart = async (req, res) => {
       return res.status(400).json({ error: "La cantidad debe ser mayor a 0" });
     }
 
+    //validamos el producto-----------------
     const producto = await Producto.findById(productoId);
 
     if (!producto) {
@@ -38,19 +39,25 @@ export const addToCart = async (req, res) => {
       return res.status(400).json({ error: "Producto no disponible" });
     }
 
-    let cart = await Cart.findOne({ usuario: req.user.id });
+    //----------------------------------------------
 
+    //validamos el carrito por usuario----------------
+    let cart = await Cart.findOne({ usuario: req.user.id });
+    //si carrito no existe
     if (!cart) {
       cart = new Cart({ usuario: req.user.id, items: [] });
     }
 
+    // si el carrito existe buscamos el item con el id del producto
     const itemExistente = cart.items.find(
       (item) => item.producto.toString() === productoId,
     );
 
+    //si encontramos el item le sumamos la cantidad nueva
     if (itemExistente) {
       itemExistente.cantidad += cantidad;
     } else {
+      // si no agregamos el producto con la cantidad en un registro nuevo
       cart.items.push({
         producto: productoId,
         cantidad,
@@ -58,9 +65,11 @@ export const addToCart = async (req, res) => {
       });
     }
 
+    //calculamos el total del carrito y lo guardamos
     cart.calcularTotal();
     await cart.save();
 
+    //traemos los datos del producto guardado en el carrito
     const cartPopulated = await cart.populate("items.producto");
 
     res.json(cartPopulated);
@@ -69,7 +78,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-// Eliminar item del carrito
+// Eliminar item del carrito----------------------------------------------------
 export const removeFromCart = async (req, res) => {
   try {
     const { productoId } = req.params;
@@ -94,7 +103,7 @@ export const removeFromCart = async (req, res) => {
   }
 };
 
-// Actualizar cantidad
+// Actualizar cantidad----------------------------------------------------------
 export const updateCartItem = async (req, res) => {
   try {
     const { productoId } = req.params;
