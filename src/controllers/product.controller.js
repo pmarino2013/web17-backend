@@ -42,6 +42,7 @@ const crearProducto = async (req, res) => {
       categoria,
       precio,
       descripcion,
+      img,
       usuario: req.user._id,
     };
 

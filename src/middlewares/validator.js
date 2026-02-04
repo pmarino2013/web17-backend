@@ -126,6 +126,34 @@ const validarIdProducto = async (id) => {
   }
 };
 
+//validar tipo de archivo
+const validateImageFile = (req, res, next) => {
+  if (!req.files || !req.files.archivo) {
+    return res.status(400).json({
+      ok: false,
+      message: "No hay archivo",
+    });
+  }
+
+  let file = req.files.archivo;
+
+  const formatosValidos = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
+  if (!formatosValidos.includes(file.mimetype)) {
+    return res.status(400).json({
+      ok: false,
+      message: "Solo se permiten imágenes (JPG, PNG,GIF,Webp)",
+    });
+  }
+
+  next();
+};
+
 export {
   registerValidation,
   loginValidation,
@@ -134,4 +162,5 @@ export {
   existeCategoriaPorId,
   validarRolAdmin,
   validarIdProducto,
+  validateImageFile,
 };
