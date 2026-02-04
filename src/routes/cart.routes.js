@@ -7,12 +7,12 @@ import {
   updateCartItem,
   clearCart,
 } from "../controllers/cart.controller.js";
-import {
-  handleValidationErrors,
-  validarCart,
-  validarIdProducto,
-} from "../middlewares/validator.js";
-import { check } from "express-validator";
+// import {
+//   handleValidationErrors,
+//   validarCart,
+//   validarIdProducto,
+// } from "../middlewares/validator.js";
+// import { check } from "express-validator";
 
 const router = Router();
 
