@@ -1,10 +1,17 @@
 import express from "express";
+
+//para acceder a los files de body
+import fileUpload from "express-fileupload";
+
 import morgan from "morgan";
 // import { dbConnect } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
+
+import uploadRoutes from "./routes/upload.routes.js";
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
@@ -24,11 +31,16 @@ app.use(express.urlencoded({ extended: true })); // explicarle a la app que pued
 app.use(morgan("dev")); // capturo todos los logs de la app y muestra por consola
 app.use(cookieParser()); // le explico a express que use cookie parser para poder acceder a las cookies
 
+app.use(fileUpload()); // Para que la app pueda manejar la request del cliente cuando envíe archivos
+
 //Rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
+
+//agrego ruta para subir archivo
+app.use("/api/upload", uploadRoutes);
 
 //Conexión Base de datos
 // await dbConnect();
