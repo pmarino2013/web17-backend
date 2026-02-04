@@ -156,6 +156,33 @@ const validarCart = async (req, res, next) => {
   next();
 };
 
+// Middleware para validar que el archivo sea una imagen
+const validateImageFile = (req, res, next) => {
+  if (!req.files || !req.files.archivo) {
+    return res.status(400).json({ ok: false, message: "No file uploaded" });
+  }
+
+  // let file = Array.isArray(req.files.archivo) ? req.files.archivo[0] : req.files.archivo;
+
+  let file = req.files.archivo;
+
+  const formatosValidos = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+
+  if (!formatosValidos.includes(file.mimetype)) {
+    return res.status(400).json({
+      ok: false,
+      message: "Solo se permiten imágenes (JPG, PNG, GIF, WebP)",
+    });
+  }
+
+  next();
+};
+
 export {
   registerValidation,
   loginValidation,
@@ -165,4 +192,5 @@ export {
   validarRol,
   validarIdProducto,
   validarCart,
+  validateImageFile,
 };

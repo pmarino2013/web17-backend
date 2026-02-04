@@ -7,7 +7,10 @@ import {
   cargarImagenCloudinary,
 } from "../controllers/upload.controller.js";
 import { check } from "express-validator";
-import { handleValidationErrors } from "../middlewares/validator.js";
+import {
+  handleValidationErrors,
+  validateImageFile,
+} from "../middlewares/validator.js";
 
 const router = Router();
 // const upload = multer();
@@ -23,6 +26,7 @@ router.put(
   "/:id",
   [
     authenticate,
+    validateImageFile,
     check("id", "Debe ser un id de Mongo").isMongoId(),
     handleValidationErrors,
   ],
