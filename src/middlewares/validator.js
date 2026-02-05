@@ -1,6 +1,7 @@
 import { check, validationResult } from "express-validator";
 import User from "../models/User.js";
 import Categoria from "../models/Category.js";
+import Producto from "../models/Product.js";
 
 //armar una función que maneje el resultado de las validaciones
 const handleValidationErrors = (req, res, next) => {
@@ -123,6 +124,10 @@ const validarIdProducto = async (id) => {
 
   if (!productoPorId) {
     throw new Error("No existe el producto");
+  }
+
+  if (!productoPorId.disponible) {
+    throw new Error("El producto no está disponible");
   }
 };
 
