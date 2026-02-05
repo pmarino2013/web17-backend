@@ -18,38 +18,7 @@ const agregarItem = async (req, res) => {
   try {
     const { productoId, cantidad } = req.body;
 
-    //si en la request vienen los datos
-    if (!productoId || !cantidad) {
-      return res.status(400).json({
-        ok: false,
-        error: "Debe proporcionar productoId y cantidad",
-      });
-    }
-
-    //cantidad es mayor que 0
-    if (cantidad < 1) {
-      return res.status(400).json({
-        ok: false,
-        message: "La cantidad debe ser mayor que 0",
-      });
-    }
-
-    //validar el producto-------------------
     const producto = await Producto.findById(productoId);
-
-    if (!producto) {
-      return res.satus(404).json({
-        ok: false,
-        message: "Producto no encontrado",
-      });
-    }
-    if (!producto.disponible) {
-      return res.satus(400).json({
-        ok: false,
-        message: "Producto no disponible",
-      });
-    }
-    //------------------------------------------
 
     let cart = await Cart.findOne({ usuario: req.user._id });
 

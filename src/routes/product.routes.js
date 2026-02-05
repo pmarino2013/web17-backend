@@ -25,11 +25,7 @@ router.post(
       .withMessage("La categoría es obligatoria")
       .isMongoId()
       .withMessage("No es un id de mongo válido"),
-    check("usuario")
-      .notEmpty()
-      .withMessage("El usuario es obligatorio")
-      .isMongoId()
-      .withMessage("Debe ser un id de mongo válido"),
+
     handleValidationErrors,
   ],
   crearProducto,
