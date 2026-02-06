@@ -9,6 +9,7 @@ import {
 import { check } from "express-validator";
 import {
   handleValidationErrors,
+  validarRol,
   validateImageFile,
 } from "../middlewares/validator.js";
 
@@ -17,7 +18,7 @@ const router = Router();
 
 router.post(
   "/",
-  [authenticate],
+  [authenticate, validarRol],
   //   upload.single("archivo"),
   cargarImagenCloudinary,
 );
@@ -26,6 +27,7 @@ router.put(
   "/:id",
   [
     authenticate,
+    validarRol,
     validateImageFile,
     check("id", "Debe ser un id de Mongo").isMongoId(),
     handleValidationErrors,

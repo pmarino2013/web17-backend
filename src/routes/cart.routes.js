@@ -7,6 +7,7 @@ import {
   updateCartItem,
   clearCart,
 } from "../controllers/cart.controller.js";
+import { agregarItemCartValidation } from "../middlewares/validator.js";
 // import {
 //   handleValidationErrors,
 //   validarCart,
@@ -20,19 +21,7 @@ const router = Router();
 router.get("/", authenticate, getCart);
 
 // Agregar producto al carrito
-router.post(
-  "/add",
-  [
-    authenticate,
-    // check("items.*.producto").isMongoId().withMessage("No es un id válido"),
-    // check("items.*.cantidad", "la cantidad debe ser mayor que 0").isInt({
-    //   min: 1,
-    // }),
-    // check("items.producto").custom(validarIdProducto),
-    // handleValidationErrors,
-  ],
-  addToCart,
-);
+router.post("/add", [authenticate, agregarItemCartValidation], addToCart);
 
 // Actualizar cantidad de un producto en el carrito
 router.put("/:productoId", authenticate, updateCartItem);

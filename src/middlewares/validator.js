@@ -156,6 +156,31 @@ const validarCart = async (req, res, next) => {
   next();
 };
 
+// 4 - Validación para agregar item al carrito----------------------------------
+const agregarItemCartValidation = () => [
+  check("productoId")
+    .notEmpty()
+    .withMessage("Debe proporcionar productoId")
+    .isMongoId()
+    .withMessage("productoId debe ser un ID válido")
+    .custom(async (value) => {
+      const producto = await Producto.findById(value);
+      if (!producto) {
+        throw new Error("Producto no encontrado");
+      }
+      if (!producto.disponible) {
+        throw new Error("Producto no disponible");
+      }
+    }),
+  check("cantidad")
+    .notEmpty()
+    .withMessage("Debe proporcionar cantidad")
+    .isInt({ min: 1 })
+    .withMessage("La cantidad debe ser mayor que 0"),
+  handleValidationErrors,
+];
+//-------------------------------------------------------
+
 // Middleware para validar que el archivo sea una imagen
 const validateImageFile = (req, res, next) => {
   if (!req.files || !req.files.archivo) {
@@ -193,4 +218,5 @@ export {
   validarIdProducto,
   validarCart,
   validateImageFile,
+  agregarItemCartValidation,
 };

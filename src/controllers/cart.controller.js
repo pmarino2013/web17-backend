@@ -18,26 +18,8 @@ export const addToCart = async (req, res) => {
   try {
     const { productoId, cantidad } = req.body;
 
-    if (!productoId || !cantidad) {
-      return res
-        .status(400)
-        .json({ error: "Debe proporcionar productoId y cantidad" });
-    }
-
-    if (cantidad < 1) {
-      return res.status(400).json({ error: "La cantidad debe ser mayor a 0" });
-    }
-
     //validamos el producto-----------------
     const producto = await Producto.findById(productoId);
-
-    if (!producto) {
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
-
-    if (!producto.disponible) {
-      return res.status(400).json({ error: "Producto no disponible" });
-    }
 
     //----------------------------------------------
 
