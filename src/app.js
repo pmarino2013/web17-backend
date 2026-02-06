@@ -1,19 +1,19 @@
 import express from "express";
-
 //para acceder a los files de body
 import fileUpload from "express-fileupload";
-
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import morgan from "morgan";
 // import { dbConnect } from "./config/db.js";
+//importar rutas
 import authRoutes from "./routes/auth.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
-
 import uploadRoutes from "./routes/upload.routes.js";
 
-import cookieParser from "cookie-parser";
-import cors from "cors";
+import paymentRoutes from "./routes/payment.routes.js";
+
 const app = express();
 
 //const PORT = process.env.PORT || 4500; //Esta en la manera de acceder a las variables de entorno y setearlas en una variable
@@ -41,6 +41,9 @@ app.use("/api/cart", cartRoutes);
 
 //agrego ruta para subir archivo
 app.use("/api/upload", uploadRoutes);
+
+//Ruta payment
+app.use("/api/payment", paymentRoutes);
 
 //Conexión Base de datos
 // await dbConnect();
