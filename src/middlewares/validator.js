@@ -161,8 +161,7 @@ const agregarItemCartValidation = () => [
   check("productoId")
     .notEmpty()
     .withMessage("Debe proporcionar productoId")
-    .isMongoId()
-    .withMessage("productoId debe ser un ID válido")
+
     .custom(async (value) => {
       const producto = await Producto.findById(value);
       if (!producto) {

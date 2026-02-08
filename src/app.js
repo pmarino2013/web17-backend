@@ -22,7 +22,8 @@ const app = express();
 app.use(
   cors({
     origin: "http://localhost:9500",
-    credencial: true,
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 app.use(express.static("public")); //le digo a express que la carpeta public es estatica y de ahi va a servir los archivos

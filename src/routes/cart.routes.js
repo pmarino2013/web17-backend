@@ -21,7 +21,7 @@ const router = Router();
 router.get("/", authenticate, getCart);
 
 // Agregar producto al carrito
-router.post("/add", [authenticate, agregarItemCartValidation], addToCart);
+router.post("/add", [authenticate], addToCart);
 
 // Actualizar cantidad de un producto en el carrito
 router.put("/:productoId", authenticate, updateCartItem);
