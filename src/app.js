@@ -22,7 +22,7 @@ const app = express();
 app.use(
   cors({
     origin: "http://localhost:9500",
-    credencials: true,
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
