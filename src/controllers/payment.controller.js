@@ -19,8 +19,8 @@ const createPayment = async (req, res) => {
           },
         ],
         back_urls: {
-          success: "https://www.tu-sitio/success",
-          failure: "https://www.tu-sitio/failure",
+          success: "http://localhost:9500/success",
+          failure: "http://localhost:9500/failure",
           pending: "https://www.tu-sitio/pending",
         },
         auto_return: "approved",
