@@ -3,15 +3,13 @@ import Producto from "../models/Product.js";
 
 //obtener la lista de productos
 const obtenerProductos = async (req, res) => {
-  //   const productos = await Producto.find({ estado: true })
-  //     .populate("usuario", "username email role")
-  //     .populate("categoria", "nombre");
-
-  //   const total = await Producto.countDocuments({ estado: true });
+  const { limite = 5, desde = 0 } = req.query;
 
   const [total, productos] = await Promise.all([
     Producto.countDocuments({ estado: true }),
     Producto.find({ estado: true })
+      .limit(limite)
+      .skip(desde)
       .populate("usuario", "username email role")
       .populate("categoria", "nombre"),
   ]);
