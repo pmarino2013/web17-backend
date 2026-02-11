@@ -20,12 +20,11 @@ const createPayment = async (req, res) => {
             unit_price: precio,
           },
         ],
-        back_urls: {
-          success: "https://www.tu-sitio/success",
-          failure: "https://www.tu-sitio/failure",
-          pending: "https://www.tu-sitio/pending",
+        back_url: {
+          success: "http://localhost:9500/success",
+          failure: "http://localhost:9500/failure",
+          pending: "http://localhost:9500/pending",
         },
-        auto_return: "approved",
       },
     });
 
