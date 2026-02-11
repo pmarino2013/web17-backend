@@ -11,6 +11,7 @@ import categoryRoutes from "./routes/category.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
+import searchRoutes from "./routes/search.routes.js";
 
 import paymentRoutes from "./routes/payment.routes.js";
 
@@ -46,6 +47,8 @@ app.use("/api/upload", uploadRoutes);
 //Ruta payment
 app.use("/api/payment", paymentRoutes);
 
+//ruta buscar
+app.use("/api/search", searchRoutes);
 //Conexión Base de datos
 // await dbConnect();
 
