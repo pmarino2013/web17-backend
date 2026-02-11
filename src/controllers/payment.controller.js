@@ -18,12 +18,11 @@ const createPayment = async (req, res) => {
             unit_price: req.body.precio,
           },
         ],
-        back_urls: {
+        back_url: {
           success: "http://localhost:9500/success",
           failure: "http://localhost:9500/failure",
-          pending: "https://www.tu-sitio/pending",
+          pending: "http://localhost:9500/pending",
         },
-        auto_return: "approved",
       },
     });
     // .then(console.log)

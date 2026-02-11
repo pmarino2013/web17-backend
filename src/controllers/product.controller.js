@@ -2,14 +2,15 @@ import Producto from "../models/Product.js";
 
 //Get para traer todos los productos paginados--------------------
 const obtenerProductos = async (req = request, res = response) => {
-  //   const { limite = 5, desde = 0 } = req.query;
+  // paginación y total de productos
+  const { limite = 5, desde = 0 } = req.query;
   const query = { estado: true };
 
   const [total, productos] = await Promise.all([
     Producto.countDocuments(query),
     Producto.find(query)
-      //   .skip(Number(desde))
-      //   .limit(Number(limite))
+      .skip(Number(desde)) //desde donde quiero empezar a mostrar los productos
+      .limit(Number(limite)) //cuantos productos quiero mostrar
       .populate("categoria", "nombre")
       .populate("usuario", "username"),
     //Como traigo los datos de los usuarios y las categorias?🤔
