@@ -9,6 +9,7 @@ import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
+import searchRoutes from "./routes/search.routes.js";
 
 import cookieParser from "cookie-parser";
 //importar Cors
@@ -39,6 +40,7 @@ app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/search", searchRoutes);
 
 export default app;
 
