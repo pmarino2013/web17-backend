@@ -210,3 +210,26 @@ Pablo Marino
 
 Proyecto educativo para aprendizaje de desarrollo backend.
 
+
+---
+
+## 🖥️ Frontend React + Tailwind (nuevo)
+
+Se agregó un frontend completo en `frontend/` construido con:
+
+- React (JavaScript)
+- TailwindCSS
+- Fetch API para todas las peticiones HTTP
+- Carpeta `helpers/` para centralizar llamadas al backend
+
+### Ejecutar frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+URL por defecto: `http://localhost:9500`
+
+> Si necesitas cambiar la URL del backend, define `VITE_API_URL` en un `.env` dentro de `frontend/`.
