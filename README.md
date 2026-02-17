@@ -210,26 +210,24 @@ Pablo Marino
 
 Proyecto educativo para aprendizaje de desarrollo backend.
 
-
 ---
 
-## 🖥️ Frontend React + Tailwind (nuevo)
+## 🖥️ Frontend React + Tailwind (repositorio separado)
 
-Se agregó un frontend completo en `frontend/` construido con:
+El frontend fue separado de este backend y ahora vive en un repositorio independiente para mantener una arquitectura desacoplada.
 
-- React (JavaScript)
-- TailwindCSS
-- Fetch API para todas las peticiones HTTP
-- Carpeta `helpers/` para centralizar llamadas al backend
-
-### Ejecutar frontend
+- Ruta local creada en este entorno: `/workspace/web17-frontend`
+- Levantar frontend:
 
 ```bash
-cd frontend
+cd /workspace/web17-frontend
 npm install
 npm run dev
 ```
 
-URL por defecto: `http://localhost:9500`
+- Levantar backend (este repo):
 
-> Si necesitas cambiar la URL del backend, define `VITE_API_URL` en un `.env` dentro de `frontend/`.
+```bash
+npm install
+npm run dev
+```
