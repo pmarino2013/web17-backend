@@ -210,3 +210,24 @@ Pablo Marino
 
 Proyecto educativo para aprendizaje de desarrollo backend.
 
+---
+
+## 🖥️ Frontend React + Tailwind (repositorio separado)
+
+El frontend fue separado de este backend y ahora vive en un repositorio independiente para mantener una arquitectura desacoplada.
+
+- Ruta local creada en este entorno: `/workspace/web17-frontend`
+- Levantar frontend:
+
+```bash
+cd /workspace/web17-frontend
+npm install
+npm run dev
+```
+
+- Levantar backend (este repo):
+
+```bash
+npm install
+npm run dev
+```
